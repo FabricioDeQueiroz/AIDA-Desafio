@@ -1,0 +1,15 @@
+# Geral:
+*.log
+*.cache
+.env
+
+# Service:
+*.sln.DotSettings.user
+Library-Service/bin/
+Library-Service/obj/
+Library-Service/Library-Service/obj/
+Library-Service/TestResults/
+Library-Service/appsettings.Development.json
+Library-Service/.idea/
+TestResults/
+data-protection-keys/
