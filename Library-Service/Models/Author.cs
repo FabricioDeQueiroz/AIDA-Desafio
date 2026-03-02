@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Library_Service.Models;
 
 [Table("Author")]
-public class Author
+public class Author : BaseEntity
 {
-    [Key] [Column("id")] public Guid Id { get; init; }
+    [Key] [Column("id")] public Guid Id { get; init; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "O nome é obrigatório.")]
     [StringLength(150, ErrorMessage = "O nome não pode exceder 150 caracteres.")]
@@ -16,4 +16,6 @@ public class Author
     [StringLength(2, ErrorMessage = "A nacionalidade não pode exceder 2 caracteres.")]
     [Column("nationality")]
     public string Nationality { get; set; } = string.Empty;
+
+    public ICollection<Book> Books { get; set; } = new List<Book>();
 }

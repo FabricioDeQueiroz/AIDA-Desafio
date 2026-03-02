@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Library_Service.Models;
 
 [Table("Book")]
-public class Book
+public class Book : BaseEntity
 {
-    [Key] [Column("id")] public Guid Id { get; init; }
+    [Key] [Column("id")] public Guid Id { get; init; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "O título é obrigatório.")]
     [StringLength(300, ErrorMessage = "O título não pode exceder 300 caracteres.")]
@@ -33,4 +33,6 @@ public class Book
     public Guid AuthorId { get; set; }
 
     [ForeignKey("AuthorId")] public Author Author { get; set; } = null!;
+
+    public ICollection<Loan> Loans { get; set; } = new List<Loan>();
 }
