@@ -2,6 +2,9 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS dev
 
 WORKDIR /src
 
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
 ENV ASPNETCORE_ENVIRONMENT=Development
 
 EXPOSE 5042
