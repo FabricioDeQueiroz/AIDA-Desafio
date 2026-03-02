@@ -19,7 +19,6 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="Services\Book\" />
       <Folder Include="Services\Loan\" />
     </ItemGroup>
 
