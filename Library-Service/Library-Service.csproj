@@ -19,8 +19,8 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="Services\Interfaces\" />
-      <Folder Include="Views\" />
+      <Folder Include="Services\Book\" />
+      <Folder Include="Services\Loan\" />
     </ItemGroup>
 
 </Project>
