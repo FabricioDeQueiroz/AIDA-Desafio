@@ -32,7 +32,3 @@ public record LoanCreateDto(
     [Required(ErrorMessage = "O ID do livro é obrigatório.")]
     Guid BookId
 );
-
-public record LoanUpdateDto(
-    [Required] Guid Id
-);
