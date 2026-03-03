@@ -148,15 +148,16 @@ public class AuthorService(AppDbContext context) : IAuthorService
         try
         {
             var author = await _context.Authors
-                .Include(a => a.Books)
-                .FirstOrDefaultAsync(a => a.Id == id);
+                .FindAsync(id);
 
             if (author == null)
             {
                 return Result<bool>.Failure("Autor não encontrado.");
             }
 
-            if (author.Books.Count != 0)
+            var hasBooks = await _context.Books.AnyAsync(b => b.AuthorId == id);
+
+            if (hasBooks)
             {
                 return Result<bool>.Failure(
                     "Não é possível excluir o autor porque ele possui livros vinculados ao seu registro.");

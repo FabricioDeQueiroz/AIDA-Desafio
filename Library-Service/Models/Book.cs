@@ -14,7 +14,7 @@ public class Book : BaseEntity
     public string Title { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "O ISBN é obrigatório.")]
-    [StringLength(17, MinimumLength = 13, ErrorMessage = "O ISBN deve ter entre 13 e 17 caracteres.")]
+    [StringLength(13, MinimumLength = 13, ErrorMessage = "O ISBN deve ter 13 caracteres.")]
     [Column("isbn")]
     public string Isbn { get; set; } = string.Empty;
 
