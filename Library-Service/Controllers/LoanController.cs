@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library_Service.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("loan")]
 public class LoanController(ILoanService loanService) : ControllerBase
 {
     [HttpGet]
@@ -24,11 +24,10 @@ public class LoanController(ILoanService loanService) : ControllerBase
         return Ok(result.Data);
     }
 
-    // TODO ver ser o "?" fez alguma diferença com o GetById de Author
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<LoanDetailGetDto?>> GetLoanById(Guid id)
+    public async Task<ActionResult<LoanDetailGetDto>> GetLoanById(Guid id)
     {
         var result = await loanService.GetLoanByIdAsync(id);
 

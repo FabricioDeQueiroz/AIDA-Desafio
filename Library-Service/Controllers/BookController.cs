@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library_Service.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("book")]
 public class BookController(IBookService bookService) : ControllerBase
 {
     [HttpGet]
@@ -23,11 +23,10 @@ public class BookController(IBookService bookService) : ControllerBase
         return Ok(result.Data);
     }
 
-    // TODO ver ser o "?" fez alguma diferença com o GetById de Author
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<BookGetDto?>> GetBookById(Guid id)
+    public async Task<ActionResult<BookGetDto>> GetBookById(Guid id)
     {
         var result = await bookService.GetBookByIdAsync(id);
 
@@ -37,7 +36,7 @@ public class BookController(IBookService bookService) : ControllerBase
         return Ok(result.Data);
     }
     
-    [HttpGet]
+    [HttpGet("/book/title-isbn")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<BookGetDto?>> GetBookByIsbnOrTitle(

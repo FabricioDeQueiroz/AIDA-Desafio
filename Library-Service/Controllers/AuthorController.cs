@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library_Service.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("author")]
 public class AuthorController(IAuthorService authorService) : ControllerBase
 {
     [HttpGet]

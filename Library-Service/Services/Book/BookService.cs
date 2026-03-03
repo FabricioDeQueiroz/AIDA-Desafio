@@ -1,4 +1,5 @@
 using Library_Service.DTOs;
+using Library_Service.Models;
 using Library_Service.Models.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -125,12 +126,19 @@ public class BookService(AppDbContext context) : IBookService
         try
         {
             var author = await _context.Authors.FindAsync(bookDto.IdAuthor);
-            
+
             if (author == null)
             {
                 return Result<BookGetDto>.Failure("O autor informado não existe.");
             }
-            
+
+            var isbnExists = await _context.Books.AnyAsync(b => b.Isbn == bookDto.Isbn);
+
+            if (isbnExists)
+            {
+                return Result<BookGetDto>.Failure("O ISBN fornecido já está registrado em outro livro.");
+            }
+
             var book = new Models.Book
             {
                 Title = bookDto.Title,
@@ -179,6 +187,14 @@ public class BookService(AppDbContext context) : IBookService
             if (book == null)
             {
                 return Result<BookGetDto>.Failure("Livro não encontrado.");
+            }
+
+            var isbnExists = await _context.Books
+                .AnyAsync(b => b.Isbn == bookDto.Isbn && b.Id != bookDto.IdBook);
+
+            if (isbnExists)
+            {
+                return Result<BookGetDto>.Failure("O ISBN fornecido já está registrado em outro livro.");
             }
 
             if (book.AuthorId != bookDto.IdAuthor)
