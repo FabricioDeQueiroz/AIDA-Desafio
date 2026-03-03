@@ -53,7 +53,7 @@ public class BookService(AppDbContext context) : IBookService
         {
             var query = _context.Books.AsNoTracking();
 
-            var books = await query
+            var book = await query
                 .Where(b => b.Id == id)
                 .Select(b => new BookGetDto(
                     b.Id,
@@ -71,9 +71,9 @@ public class BookService(AppDbContext context) : IBookService
                 ))
                 .FirstOrDefaultAsync();
 
-            return books == null
+            return book == null
                 ? Result<BookGetDto?>.Failure("Livro não encontrado.")
-                : Result<BookGetDto?>.Ok(books);
+                : Result<BookGetDto?>.Ok(book);
         }
         catch (Exception)
         {
@@ -124,13 +124,21 @@ public class BookService(AppDbContext context) : IBookService
     {
         try
         {
+            var author = await _context.Authors.FindAsync(bookDto.IdAuthor);
+            
+            if (author == null)
+            {
+                return Result<BookGetDto>.Failure("O autor informado não existe.");
+            }
+            
             var book = new Models.Book
             {
                 Title = bookDto.Title,
                 Isbn = bookDto.Isbn,
                 Year = bookDto.Year,
                 Quantity = bookDto.Quantity,
-                AuthorId = bookDto.IdAuthor
+                AuthorId = bookDto.IdAuthor,
+                Author = author
             };
 
             _context.Books.Add(book);
@@ -146,9 +154,9 @@ public class BookService(AppDbContext context) : IBookService
                 book.CreatedAt,
                 book.UpdatedAt,
                 new AuthorSummaryDto(
-                    book.Author.Id,
-                    book.Author.Name,
-                    book.Author.Nationality
+                    author.Id,
+                    author.Name,
+                    author.Nationality
                 )
             );
 
