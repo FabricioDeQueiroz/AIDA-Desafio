@@ -9,12 +9,12 @@ public class Book : BaseEntity
     [Key] [Column("id")] public Guid Id { get; init; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "O título é obrigatório.")]
-    [StringLength(300, ErrorMessage = "O título não pode exceder 300 caracteres.")]
+    [StringLength(300, MinimumLength = 3, ErrorMessage = "O título deve ter entre 3 e 300 caracteres.")]
     [Column("title")]
     public string Title { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "O ISBN é obrigatório.")]
-    [StringLength(17, ErrorMessage = "O ISBN não pode exceder 17 caracteres.")]
+    [StringLength(17, MinimumLength = 13, ErrorMessage = "O ISBN deve ter entre 13 e 17 caracteres.")]
     [Column("isbn")]
     public string Isbn { get; set; } = string.Empty;
 

@@ -15,7 +15,7 @@ public class Loan : BaseEntity
     [Key] [Column("id")] public Guid Id { get; init; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "O nome do locatário é obrigatório.")]
-    [StringLength(150, ErrorMessage = "O nome do locatário não pode exceder 150 caracteres.")]
+    [StringLength(150, MinimumLength = 3, ErrorMessage = "O nome do locatário deve ter entre 3 e 150 caracteres.")]
     [Column("borrower_name")]
     public string BorrowerName { get; set; } = string.Empty;
 
