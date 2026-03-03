@@ -29,12 +29,20 @@ public record AuthorDetailGetDto(
 );
 
 public record AuthorCreateDto(
-    [Required] [StringLength(150)] string Name,
-    [DefaultValue("BR")] [StringLength(2)] string? Nationality
+    [Required(ErrorMessage = "O nome é obrigatório.")]
+    [StringLength(150, ErrorMessage = "O nome não pode exceder 150 caracteres.")]
+    string Name,
+    [DefaultValue("BR")]
+    [StringLength(2, ErrorMessage = "A nacionalidade não pode exceder 2 caracteres.")]
+    string? Nationality
 );
 
 public record AuthorUpdateDto(
-    [Required] Guid IdAuthor,
-    [Required] [StringLength(150)] string Name,
-    [StringLength(2)] string? Nationality
+    [Required(ErrorMessage = "O ID é obrigatório.")]
+    Guid IdAuthor,
+    [Required(ErrorMessage = "O nome é obrigatório.")]
+    [StringLength(150, ErrorMessage = "O nome não pode exceder 150 caracteres.")]
+    string Name,
+    [StringLength(2, ErrorMessage = "A nacionalidade não pode exceder 2 caracteres.")]
+    string? Nationality
 );

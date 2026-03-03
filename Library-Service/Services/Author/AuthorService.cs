@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library_Service.Services.Author;
 
-public class AuthorService(AppDbContext context)
+public class AuthorService(AppDbContext context) : IAuthorService
 {
     private readonly AppDbContext _context = context;
 
@@ -66,7 +66,7 @@ public class AuthorService(AppDbContext context)
                 .FirstOrDefaultAsync();
 
             return author == null
-                ? Result<AuthorDetailGetDto?>.Failure($"Autor com ID: {id}, não encontrado.")
+                ? Result<AuthorDetailGetDto?>.Failure("Autor não encontrado.")
                 : Result<AuthorDetailGetDto?>.Ok(author);
         }
         catch (Exception)
@@ -117,7 +117,7 @@ public class AuthorService(AppDbContext context)
 
             if (author == null)
             {
-                return Result<AuthorDetailGetDto>.Failure($"Autor com ID {authorDto.IdAuthor}, não encontrado.");
+                return Result<AuthorDetailGetDto>.Failure("Autor não encontrado.");
             }
 
             author.Name = authorDto.Name;
@@ -153,7 +153,7 @@ public class AuthorService(AppDbContext context)
 
             if (author == null)
             {
-                return Result<bool>.Failure($"Autor com ID {id}, não encontrado.");
+                return Result<bool>.Failure("Autor não encontrado.");
             }
 
             if (author.Books.Count != 0)

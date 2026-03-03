@@ -1,4 +1,5 @@
 using Library_Service.Models.Data;
+using Library_Service.Services.Author;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // PostgreSQL Connection
 builder.Services.AddDbContext<AppDbContext>(opts => opts.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 var app = builder.Build();
 
