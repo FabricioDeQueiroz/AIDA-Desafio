@@ -1,14 +1,9 @@
 name: Test Library - Pipeline
 
 on:
-  push:
-    branches:
-      - main
-      - ci_cd_test
   pull_request:
     branches:
       - main
-      - ci_cd_test
 
 jobs:
   tests:
@@ -45,6 +40,12 @@ jobs:
 
       - name: Restore EF Core CLI (Local Tool)
         run: dotnet tool restore
+
+      - name: Restore Project Dependencies
+        run: dotnet restore Library-Service/Library-Service.csproj
+
+      - name: Build Project
+        run: dotnet build Library-Service/Library-Service.csproj --no-restore
 
       - name: Apply Database Migrations
         env:
