@@ -1,0 +1,67 @@
+name: Test Library - Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - ci_cd_test
+  pull_request:
+    branches:
+      - main
+      - ci_cd_test
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres_ci
+          POSTGRES_PASSWORD: postgres_ci_pass
+          POSTGRES_DB: Library_CI_Tests
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres_ci -d Library_CI_Tests"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.x"
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres_ci; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
+
+      - name: Restore EF Core CLI (Local Tool)
+        run: dotnet tool restore
+
+      - name: Apply Database Migrations
+        env:
+          ASPNETCORE_ENVIRONMENT: Test
+          ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
+        run: |
+          dotnet tool run dotnet-ef database update --project Library-Service
+
+      - name: Run tests
+        env:
+          ASPNETCORE_ENVIRONMENT: Test
+          POSTGRES_USER: postgres_ci
+          POSTGRES_PASSWORD: postgres_ci_pass
+          POSTGRES_DB: Library_CI_Tests
+          DB_HOST: localhost
+          DB_PORT: 5432
+          ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
+        run: |
+          dotnet restore Library-Service/Library-Service.csproj
+          dotnet test Library-Service/Library-Service.csproj -l "console;verbosity=normal" --no-restore
