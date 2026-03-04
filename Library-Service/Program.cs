@@ -10,6 +10,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+// CORS origins from env
+var configuredOrigins = builder.Configuration["Cors:AllowedOrigins"];
+
+if (string.IsNullOrWhiteSpace(configuredOrigins))
+    throw new InvalidOperationException("A configuração obrigatória 'Cors:AllowedOrigins' não foi informada.");
+
+var allowedOrigins = configuredOrigins
+    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+if (allowedOrigins.Length == 0)
+    throw new InvalidOperationException("A configuração 'Cors:AllowedOrigins' está vazia ou inválida.");
+
+// CORS configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendCors", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // PostgreSQL connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -30,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FrontendCors");
 
 app.UseAuthorization();
 

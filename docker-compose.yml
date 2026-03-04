@@ -32,6 +32,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:5042
       - ConnectionStrings__DefaultConnection=Host=library-postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - Cors__AllowedOrigins=${FRONTEND_ALLOWED_ORIGINS}
     volumes:
       - .:/src
       - ~/.aspnet/https:/root/.aspnet/https:ro
