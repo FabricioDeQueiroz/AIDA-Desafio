@@ -1,9 +1,6 @@
 name: Test Library - Pipeline
 
 on:
-  push:
-    branches:
-      - backend
   pull_request:
     branches:
       - main
@@ -46,6 +43,9 @@ jobs:
 
       - name: Restore Project Dependencies
         run: dotnet restore Library-Service/Library-Service.csproj
+
+      - name: Build Project
+        run: dotnet build Library-Service/Library-Service.csproj --no-restore
 
       - name: Apply Database Migrations
         env:
