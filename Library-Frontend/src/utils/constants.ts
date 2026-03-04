@@ -5,6 +5,7 @@ export const APP_CONFIG = {
 
 export const ROUTES = {
   home: "/",
+  dashboard: "/panel",
   authors: "/authors",
   books: "/books",
   loans: "/loans",

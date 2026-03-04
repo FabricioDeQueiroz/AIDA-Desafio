@@ -1,13 +1,25 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import { AppLayout } from "./components/layout/AppLayout";
+import { AuthorsPage } from "./pages/AuthorsPage";
+import { BooksPage } from "./pages/BooksPage";
+import { HomePage } from "./pages/HomePage";
+import { LoansPage } from "./pages/LoansPage";
+import { ROUTES } from "./utils/constants";
+
 function App() {
   return (
-    <main className="min-h-screen p-6">
-      <div className="mx-auto max-w-5xl rounded-lg border border-borda-padrao bg-sucesso p-6">
-        <h1 className="text-2xl font-semibold text-texto-principal">
-          Biblioteca
-        </h1>
-        <p className="mt-2 text-sm text-texto-secundario">Home</p>
-      </div>
-    </main>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route
+          path={ROUTES.home}
+          element={<Navigate to={ROUTES.dashboard} replace />}
+        />
+        <Route path={ROUTES.dashboard} element={<HomePage />} />
+        <Route path={ROUTES.authors} element={<AuthorsPage />} />
+        <Route path={ROUTES.books} element={<BooksPage />} />
+        <Route path={ROUTES.loans} element={<LoansPage />} />
+      </Route>
+    </Routes>
   );
 }
 
