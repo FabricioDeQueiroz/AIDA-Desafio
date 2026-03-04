@@ -5,10 +5,11 @@ import type {
   AuthorGetDto,
   AuthorUpdateDto,
 } from "../types/authorDtos";
+import type { PagedResult } from "../types/commonDtos";
 
 export const authorsApi = {
   async list(page: number, size: number) {
-    const { data } = await api.get<AuthorGetDto[]>("/author", {
+    const { data } = await api.get<PagedResult<AuthorGetDto>>("/author", {
       params: { page, size },
     });
     return data;

@@ -5,10 +5,11 @@ import type {
   LoanGetDto,
   LoanStatus,
 } from "../types/loanDtos";
+import type { PagedResult } from "../types/commonDtos";
 
 export const loansApi = {
   async list(page: number, size: number, status?: LoanStatus) {
-    const { data } = await api.get<LoanGetDto[]>("/loan", {
+    const { data } = await api.get<PagedResult<LoanGetDto>>("/loan", {
       params: { page, size, status },
     });
     return data;

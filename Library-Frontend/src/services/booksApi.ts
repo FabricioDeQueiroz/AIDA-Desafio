@@ -4,10 +4,11 @@ import type {
   BookGetDto,
   BookUpdateDto,
 } from "../types/bookDtos";
+import type { PagedResult } from "../types/commonDtos";
 
 export const booksApi = {
   async list(page: number, size: number) {
-    const { data } = await api.get<BookGetDto[]>("/book", {
+    const { data } = await api.get<PagedResult<BookGetDto>>("/book", {
       params: { page, size },
     });
     return data;
