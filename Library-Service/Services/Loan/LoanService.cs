@@ -9,7 +9,7 @@ public class LoanService(AppDbContext context) : ILoanService
 {
     private readonly AppDbContext _context = context;
 
-    public async Task<Result<IEnumerable<LoanGetDto>>> GetAllLoansAsync(Status? status, int page, int size)
+    public async Task<Result<PagedResult<LoanGetDto>>> GetAllLoansAsync(Status? status, int page, int size)
     {
         try
         {
@@ -18,6 +18,8 @@ public class LoanService(AppDbContext context) : ILoanService
             if (size <= 0) size = 10;
 
             var query = _context.Loans.AsNoTracking();
+            
+            var totalCount = await query.CountAsync();
 
             // Optional filter for status
             if (status.HasValue)
@@ -40,11 +42,13 @@ public class LoanService(AppDbContext context) : ILoanService
                 ))
                 .ToListAsync();
 
-            return Result<IEnumerable<LoanGetDto>>.Ok(loans);
+            var result = new PagedResult<LoanGetDto>(loans, totalCount, page, size);
+            
+            return Result<PagedResult<LoanGetDto>>.Ok(result);
         }
         catch (Exception)
         {
-            return Result<IEnumerable<LoanGetDto>>.Failure("Ocorreu um erro ao recuperar os empréstimos.");
+            return Result<PagedResult<LoanGetDto>>.Failure("Ocorreu um erro ao recuperar os empréstimos.");
         }
     }
 

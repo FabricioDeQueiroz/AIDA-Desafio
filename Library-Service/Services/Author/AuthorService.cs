@@ -8,7 +8,7 @@ public class AuthorService(AppDbContext context) : IAuthorService
 {
     private readonly AppDbContext _context = context;
 
-    public async Task<Result<IEnumerable<AuthorGetDto>>> GetAllAuthorsAsync(int page, int size)
+    public async Task<Result<PagedResult<AuthorGetDto>>> GetAllAuthorsAsync(int page, int size)
     {
         try
         {
@@ -17,6 +17,8 @@ public class AuthorService(AppDbContext context) : IAuthorService
             if (size <= 0) size = 10;
 
             var query = _context.Authors.AsNoTracking();
+
+            var totalCount = await query.CountAsync();
 
             // Authors paginated query 
             var authors = await query
@@ -33,11 +35,13 @@ public class AuthorService(AppDbContext context) : IAuthorService
                 ))
                 .ToListAsync();
 
-            return Result<IEnumerable<AuthorGetDto>>.Ok(authors);
+            var result = new PagedResult<AuthorGetDto>(authors, totalCount, page, size);
+            
+            return Result<PagedResult<AuthorGetDto>>.Ok(result);
         }
         catch (Exception)
         {
-            return Result<IEnumerable<AuthorGetDto>>.Failure("Ocorreu um erro ao recuperar os autores.");
+            return Result<PagedResult<AuthorGetDto>>.Failure("Ocorreu um erro ao recuperar os autores.");
         }
     }
 

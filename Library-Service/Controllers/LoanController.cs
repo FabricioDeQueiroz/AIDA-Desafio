@@ -12,7 +12,7 @@ public class LoanController(ILoanService loanService) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<LoanGetDto>>> GetLoans(
+    public async Task<ActionResult<PagedResult<LoanGetDto>>> GetLoans(
         [FromQuery] Status? status, [FromQuery] int page = 1, [FromQuery] int size = 10
     )
     {

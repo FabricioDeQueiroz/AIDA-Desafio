@@ -12,7 +12,7 @@ public interface ILoanService
     /// <param name="page">The current page number.</param>
     /// <param name="size">The number of records per page.</param>
     /// <returns>A Result containing a paginated collection of <see cref="LoanGetDto"/>.</returns>
-    Task<Result<IEnumerable<LoanGetDto>>> GetAllLoansAsync(Status? status, int page, int size);
+    Task<Result<PagedResult<LoanGetDto>>> GetAllLoansAsync(Status? status, int page, int size);
 
     /// <summary>
     /// Retrieves detailed information about a specific Loan.
