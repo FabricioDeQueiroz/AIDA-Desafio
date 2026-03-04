@@ -1,10 +1,6 @@
 name: Test Library - Pipeline
 
 on:
-  push:
-    branches:
-      - main
-      - ci_cd_test
   pull_request:
     branches:
       - main
