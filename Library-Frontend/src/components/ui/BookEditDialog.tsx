@@ -34,7 +34,7 @@ export const BookEditDialog = ({
         }
       }}
     >
-      <div className="w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 shadow-2xl">
+      <div className="w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
         <h3 className="text-lg font-bold">Editar livro</h3>
 
         <form className="mt-5 space-y-4" onSubmit={onSubmit}>
@@ -42,7 +42,7 @@ export const BookEditDialog = ({
             <span className="mb-1 block text-sm font-semibold">Título</span>
             <input
               type="text"
-              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 outline-none transition focus:border-destaque"
+              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
               {...form.register("title")}
               aria-invalid={Boolean(form.formState.errors.title)}
             />
@@ -53,7 +53,7 @@ export const BookEditDialog = ({
             <span className="mb-1 block text-sm font-semibold">ISBN</span>
             <input
               type="text"
-              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 outline-none transition focus:border-destaque"
+              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
               inputMode="numeric"
               value={formatIsbn(isbnValue)}
               onChange={(event) => {
@@ -73,7 +73,7 @@ export const BookEditDialog = ({
               <span className="mb-1 block text-sm font-semibold">Ano</span>
               <input
                 type="number"
-                className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 outline-none transition focus:border-destaque"
+                className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
                 {...form.register("year", { valueAsNumber: true })}
                 aria-invalid={Boolean(form.formState.errors.year)}
               />
@@ -84,7 +84,7 @@ export const BookEditDialog = ({
               <span className="mb-1 block text-sm font-semibold">Quantidade</span>
               <input
                 type="number"
-                className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 outline-none transition focus:border-destaque"
+                className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
                 {...form.register("quantity", { valueAsNumber: true })}
                 aria-invalid={Boolean(form.formState.errors.quantity)}
               />
@@ -95,7 +95,7 @@ export const BookEditDialog = ({
           <label className="block">
             <span className="mb-1 block text-sm font-semibold">Autor</span>
             <select
-              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 outline-none transition focus:border-destaque"
+              className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
               {...form.register("idAuthor")}
               aria-invalid={Boolean(form.formState.errors.idAuthor)}
             >
@@ -119,7 +119,7 @@ export const BookEditDialog = ({
             </button>
             <button
               type="submit"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-destaque px-4 py-2 text-sm font-semibold text-white transition hover:bg-destaque-hover disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-destaque px-4 py-2 text-sm font-semibold text-texto-principal transition hover:bg-destaque-hover disabled:cursor-not-allowed disabled:opacity-60"
               disabled={isSubmitting}
             >
               {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}

@@ -20,7 +20,7 @@ export const FeedbackToast = ({ type, message, onClose }: FeedbackToastProps) =>
         <span className="text">{message}</span>
         <button
           type="button"
-          className="ml-1 rounded-lg p-1 text-texto-secundario transition hover:bg-fundo-superficie-suave hover:text-texto-principal"
+          className="cursor-pointer ml-1 rounded-lg p-1 text-texto-secundario transition hover:bg-fundo-superficie-suave hover:text-texto-principal"
           onClick={onClose}
           aria-label="Fechar mensagem"
         >

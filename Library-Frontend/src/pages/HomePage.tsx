@@ -372,13 +372,13 @@ export const HomePage = () => {
               ))}
             </div>
           ) : (
-            <div className="pb-8 pt-16 flex h-full items-end justify-between gap-2 sm:gap-3">
+            <div className="pb-8 pt-20 flex h-full items-end justify-between gap-2 sm:gap-3">
               {monthlyLoans.map((month) => (
                 <div
                   key={month.label}
                   className="flex h-full flex-1 flex-col items-center justify-end"
                 >
-                  <div className="relative flex h-40 w-full items-end justify-center">
+                  <div className="relative flex min-h-full h-40 w-full items-end justify-center">
                     <span
                       className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-xs font-black text-texto-principal"
                       style={{ bottom: `calc(${month.height}% + 0.35rem)` }}
@@ -429,10 +429,10 @@ export const HomePage = () => {
                 className="flex items-center justify-between rounded-[10px] bg-fundo-superficie-suave p-3"
               >
                 <div>
-                  <p className="max-w-72 truncate text font-bold">
+                  <p className="max-w-72 truncate text-md font-bold">
                     {book.title}
                   </p>
-                  <p className="text-sm text-texto-secundario">
+                  <p className="text text-texto-secundario font-black">
                     {book.author.name}
                   </p>
                 </div>
@@ -495,7 +495,7 @@ export const HomePage = () => {
                   <h3 className="mt-2 truncate text-2xl font-black">
                     {selectedBook.title}
                   </h3>
-                  <p className="my-1 text text-texto-secundario">
+                  <p className="my-1 text-lg font-black text-texto-secundario">
                     {selectedBook.author.name}
                   </p>
                 </div>
@@ -511,7 +511,7 @@ export const HomePage = () => {
               </div>
               <div className="flex flex-col items-center">
                 <p className="text-xs font-black uppercase tracking-wider text-texto-secundario">
-                  Quantidade
+                  Disponível
                 </p>
                 <p className="mt-1 text-lg font-black">{selectedBook.quantity}</p>
               </div>

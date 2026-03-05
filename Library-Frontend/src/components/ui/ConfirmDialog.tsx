@@ -29,7 +29,7 @@ export const ConfirmDialog = ({
         }
       }}
     >
-      <div className="w-[min(92vw,28rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 shadow-2xl">
+      <div className="w-[min(92vw,28rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
         <h3 className="text-lg font-bold">{title}</h3>
         <p className="py-3 text-sm text-texto-secundario">{description}</p>
         <div className="mt-2 flex justify-end">
@@ -42,7 +42,7 @@ export const ConfirmDialog = ({
             </button>
             <button
               type="button"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-erro px-4 py-2 text-sm font-semibold text-white transition hover:bg-erro/70 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-erro px-4 py-2 text-sm font-semibold text-texto-principal transition hover:bg-erro/70 disabled:cursor-not-allowed disabled:opacity-60"
               onClick={onConfirm}
               disabled={isLoading}
             >
