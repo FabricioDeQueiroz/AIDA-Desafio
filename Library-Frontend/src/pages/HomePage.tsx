@@ -277,7 +277,7 @@ export const HomePage = () => {
       textClass: "text-roxo-escuro",
     },
     {
-      label: "Empréstimos",
+      label: "Empréstimos Ativos",
       value: activeLoans,
       isLoading: activeLoansQuery.isLoading,
       icon: ArrowLeftRight,
@@ -285,7 +285,7 @@ export const HomePage = () => {
       textClass: "text-vermelho-escuro",
     },
     {
-      label: "Livros",
+      label: "Livros Disponíveis",
       value: totalQuantity,
       isLoading: booksQuery.isLoading || allBooksQuery.isLoading,
       icon: LibraryBig,

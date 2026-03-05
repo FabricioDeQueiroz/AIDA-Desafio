@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -49,6 +49,7 @@ const closeDialog = (id: string) => {
 
 export const BooksPage = () => {
   const queryClient = useQueryClient();
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -78,6 +79,26 @@ export const BooksPage = () => {
     const timer = window.setTimeout(() => setFeedback(null), 3000);
     return () => window.clearTimeout(timer);
   }, [feedback]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        searchInputRef.current?.focus();
+        return;
+      }
+
+      if (
+        event.key === "Escape" &&
+        document.activeElement === searchInputRef.current
+      ) {
+        searchInputRef.current?.blur();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   const booksQuery = useQuery({
     queryKey: ["books", page],
@@ -319,12 +340,23 @@ export const BooksPage = () => {
           <label className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-texto-principal" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Buscar por título ou ISBN"
-              className="w-full rounded-lg bg-fundo-superficie-suave px-10 py-2.5 text-texto-principal outline-none transition focus:border-destaque"
+              className="w-full rounded-lg bg-fundo-superficie-suave px-10 py-2.5 text-texto-principal outline-none transition border-2 border-fundo-superficie-suave focus:border-destaque"
               value={searchInput}
               onChange={(event) => setSearchInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  event.currentTarget.blur();
+                }
+              }}
             />
+            <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-texto-principal/60 flex flex-row gap-x-1">
+              <kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">Ctrl</kbd>
+              +
+              <kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">K</kbd>
+            </div>
           </label>
 
           <div className="flex gap-2">
@@ -376,10 +408,10 @@ export const BooksPage = () => {
                   className="border-b border-borda-padrao/60"
                 >
                   <td className="px-3 py-4 font-semibold">{book.title}</td>
-                  <td className="px-3 py-4 font-semibold text-texto-secundario">
+                  <td className="px-3 py-4 font-semibold text-texto-secundario w-[15%]">
                     {formatIsbn(book.isbn)}
                   </td>
-                  <td className="px-3 py-4">
+                  <td className="px-3 py-4 w-[12%]">
                     <span className="rounded bg-fundo-superficie-suave px-4 py-1.5 text-sm font-semibold">
                       {book.quantity}
                     </span>

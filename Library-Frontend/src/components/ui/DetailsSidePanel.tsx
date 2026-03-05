@@ -36,7 +36,7 @@ export const DetailsSidePanel = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 h-[100dvh] overflow-hidden">
+    <div className="fixed inset-0 z-50 h-dvh overflow-hidden">
       <button
         type="button"
         aria-label="Fechar detalhes"
@@ -48,10 +48,10 @@ export const DetailsSidePanel = ({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="absolute inset-y-0 right-0 flex h-[100dvh] w-full max-w-full flex-col border-l border-borda-padrao bg-fundo-navbar-sidebar p-5 sm:w-[34rem] sm:max-w-[34rem] sm:p-7"
+        className="absolute inset-y-0 right-0 flex h-dvh w-full max-w-full flex-col border-l border-borda-padrao bg-fundo-navbar-sidebar p-5 sm:w-136 sm:max-w-136 sm:p-7"
       >
         <header className="flex items-center justify-between">
-          <h2 className="text-2xl font-black tracking-tight">{title}</h2>
+          <h2 className="text-2xl font-black tracking-tight border-l-[3px] border-destaque pl-2">{title}</h2>
           <button
             type="button"
             className="cursor-pointer rounded-xl p-2 text-texto-secundario transition hover:bg-fundo-superficie-suave hover:text-texto-principal"

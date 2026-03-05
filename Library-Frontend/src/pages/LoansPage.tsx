@@ -186,7 +186,7 @@ export const LoansPage = () => {
 
   const formatDateTime = (value: string | null) => {
     if (!value) {
-      return "-";
+      return "Em uso";
     }
 
     const date = new Date(value);
@@ -290,7 +290,7 @@ export const LoansPage = () => {
                   </td>
                   <td className="px-3 py-4 w-[14%]">
                     <span
-                      className={`inline-flex rounded-lg px-3 py-1.5 text-xs font-black uppercase tracking-widest ${getStatusBadgeClass(loan.status)}`}
+                      className={`inline-flex select-none rounded-lg px-3 py-1.5 text-xs font-black uppercase tracking-widest ${getStatusBadgeClass(loan.status)}`}
                     >
                       {getLoanStatusLabel(loan.status)}
                     </span>

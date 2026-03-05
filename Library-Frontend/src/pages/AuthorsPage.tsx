@@ -512,7 +512,7 @@ export const AuthorsPage = () => {
 
                 {!authorBooksWithDatesQuery.isLoading &&
                   authorBooksWithDates.length === 0 && (
-                    <p className="rounded-xl p-3 text-sm text-texto-secundario">
+                    <p className="rounded-xl p-0 text text-texto-secundario">
                       Este autor ainda não possui livros cadastrados.
                     </p>
                   )}

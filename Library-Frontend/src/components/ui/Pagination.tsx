@@ -17,7 +17,7 @@ export const Pagination = ({
   return (
     <div className="mt-4 ml-3 flex items-center justify-between">
       <p className="text-sm text-texto-secundario font-bold">
-        {`Página ${page} de ${safeTotalPages} • ${totalCount} registros`}
+        {`Página ${page} de ${safeTotalPages} | ${totalCount} registros`}
       </p>
       <div className="flex items-center gap-2">
         <button
