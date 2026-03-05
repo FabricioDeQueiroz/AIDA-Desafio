@@ -269,7 +269,7 @@ export const AuthorsPage = () => {
 
         <button
           type="button"
-          className="cursor-pointer inline-flex items-center gap-2 rounded-2xl bg-destaque px-4 py-3 text-sm font-bold text-white transition hover:bg-destaque-hover"
+          className="cursor-pointer inline-flex items-center gap-2 rounded-lg bg-destaque px-4 py-3 text-sm font-bold text-white transition hover:bg-destaque-hover"
           onClick={handleOpenCreate}
         >
           <Plus className="h-5.5 w-5.5" />

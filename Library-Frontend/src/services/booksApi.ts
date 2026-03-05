@@ -18,7 +18,7 @@ export const booksApi = {
     return data;
   },
   async searchByTitleOrIsbn(params: { title?: string; isbn?: string }) {
-    const { data } = await api.get<BookGetDto>("/book/title-isbn", {
+    const { data } = await api.get<BookGetDto[]>("/book/title-isbn", {
       params,
     });
     return data;

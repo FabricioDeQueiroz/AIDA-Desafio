@@ -170,14 +170,14 @@ export const AppLayout = () => {
           </Link>
           <button
             type="button"
-            className={`${iconButtonClass} h-10 w-10`}
+            className={`${iconButtonClass} h-10 w-10 cursor-pointer`}
             aria-label="Expandir ou recolher menu lateral"
             onClick={() => setIsSidebarExpanded((current) => !current)}
           >
             {isSidebarExpanded ? (
-              <ChevronFirst className="h-5 w-5" />
+              <ChevronFirst className="h-5 w-5 text-destaque" />
             ) : (
-              <ChevronLast className="h-5 w-5" />
+              <ChevronLast className="h-5 w-5 text-destaque" />
             )}
           </button>
         </div>
