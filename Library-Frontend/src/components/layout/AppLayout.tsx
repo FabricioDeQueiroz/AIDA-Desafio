@@ -143,7 +143,7 @@ export const AppLayout = () => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 hidden h-full border-r border-borda-padrao bg-fundo-navbar-sidebar transition-all duration-300 lg:flex lg:flex-col ${
+        className={`select-none fixed left-0 top-0 hidden h-full border-r border-borda-padrao bg-fundo-navbar-sidebar transition-all duration-300 lg:flex lg:flex-col ${
           isSidebarExpanded ? "w-72" : "w-20"
         }`}
       >
@@ -219,7 +219,7 @@ export const AppLayout = () => {
         className={`pt-16 lg:pt-0 ${isSidebarExpanded ? "lg:pl-72" : "lg:pl-20"}`}
       >
         <header className="sticky top-0 z-20 hidden items-center justify-between bg-fundo-navbar-sidebar/80 px-8 py-6 backdrop-blur lg:flex">
-          <h1 className="text-2xl font-black">{activeTitle}</h1>
+          <h1 className="select-none text-2xl font-black">{activeTitle}</h1>
         </header>
 
         <main className="mx-auto min-h-full max-w-full p-4 lg:p-8">
