@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - ci_cd_test
   pull_request:
     branches:
       - main
@@ -69,5 +70,4 @@ jobs:
           Cors__AllowedOrigins: http://localhost:5173
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
-          dotnet restore Library-Service/Library-Service.csproj
-          dotnet test Library-Service/Library-Service.csproj -l "console;verbosity=normal" --no-restore -- RunConfiguration.TreatNoTestsAsError=true
+          dotnet test -l "console;verbosity=normal" -- RunConfiguration.TreatNoTestsAsError=true

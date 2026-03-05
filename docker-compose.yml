@@ -53,5 +53,19 @@ services:
       - ./Library-Frontend:/app
       - /app/node_modules
 
+  library-service-tests:
+    container_name: library_service_tests
+    build:
+      context: .
+      target: test
+      dockerfile: Library-Service/Dockerfile
+    depends_on:
+      - library-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=library-postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - Cors__AllowedOrigins=${FRONTEND_ALLOWED_ORIGINS}
+    restart: "no"
+
 volumes:
   postgres_data:

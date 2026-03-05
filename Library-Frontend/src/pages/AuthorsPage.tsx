@@ -304,7 +304,7 @@ export const AuthorsPage = () => {
                 key={author.idAuthor}
                 className="border-b border-borda-padrao/60"
               >
-                <td className="px-3 py-4 font-semibold">{author.name}</td>
+                <td className="px-3 py-4 font-semibold w-[40%]">{author.name}</td>
                 <td className="px-3 py-4 font-black text-sm text-texto-secundario">
                   {author.nationality ?? "Não informada"}
                 </td>
