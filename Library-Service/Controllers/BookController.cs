@@ -11,7 +11,7 @@ public class BookController(IBookService bookService) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<BookGetDto>>> GetBooks(
+    public async Task<ActionResult<PagedResult<BookGetDto>>> GetBooks(
         [FromQuery] int page = 1, [FromQuery] int size = 10
     )
     {

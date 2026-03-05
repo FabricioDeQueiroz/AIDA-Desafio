@@ -10,7 +10,7 @@ public interface IBookService
     /// <param name="page">The current page number.</param>
     /// <param name="size">The number of records per page.</param>
     /// <returns>A Result containing a collection of <see cref="BookGetDto"/>.</returns>
-    Task<Result<IEnumerable<BookGetDto>>> GetAllBooksAsync(int page, int size);
+    Task<Result<PagedResult<BookGetDto>>> GetAllBooksAsync(int page, int size);
 
     /// <summary>
     /// Retrieves detailed information about a specific book, including their author.

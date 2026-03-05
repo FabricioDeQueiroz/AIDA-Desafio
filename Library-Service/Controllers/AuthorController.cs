@@ -11,7 +11,7 @@ public class AuthorController(IAuthorService authorService) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<AuthorGetDto>>> GetAuthors(
+    public async Task<ActionResult<PagedResult<AuthorGetDto>>> GetAuthors(
         [FromQuery] int page = 1, [FromQuery] int size = 10
     )
     {

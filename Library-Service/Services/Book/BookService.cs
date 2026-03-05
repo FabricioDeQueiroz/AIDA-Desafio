@@ -9,7 +9,7 @@ public class BookService(AppDbContext context) : IBookService
 {
     private readonly AppDbContext _context = context;
 
-    public async Task<Result<IEnumerable<BookGetDto>>> GetAllBooksAsync(int page, int size)
+    public async Task<Result<PagedResult<BookGetDto>>> GetAllBooksAsync(int page, int size)
     {
         try
         {
@@ -18,6 +18,8 @@ public class BookService(AppDbContext context) : IBookService
             if (size <= 0) size = 10;
 
             var query = _context.Books.AsNoTracking();
+            
+            var totalCount = await query.CountAsync();
 
             // Books paginated query 
             var books = await query
@@ -39,12 +41,14 @@ public class BookService(AppDbContext context) : IBookService
                     )
                 ))
                 .ToListAsync();
-
-            return Result<IEnumerable<BookGetDto>>.Ok(books);
+            
+            var result = new PagedResult<BookGetDto>(books, totalCount, page, size);
+            
+            return Result<PagedResult<BookGetDto>>.Ok(result);
         }
         catch (Exception)
         {
-            return Result<IEnumerable<BookGetDto>>.Failure("Ocorreu um erro ao recuperar os livros.");
+            return Result<PagedResult<BookGetDto>>.Failure("Ocorreu um erro ao recuperar os livros.");
         }
     }
 

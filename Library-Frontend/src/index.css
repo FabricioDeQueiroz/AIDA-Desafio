@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+@plugin "daisyui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* FONTES PERSONALIZADAS - TAILWIND */
+@theme {
+  --font-loen: "Loen", sans-serif;
+  --font-michroma: Michroma, sans-serif;
+  --font-inter: Inter, sans-serif;
+  --font-manrope: Manrope, sans-serif;
+  --font-ubuntu: Ubuntu, sans-serif;
+  --font-helvetica: Helvetica, sans-serif;
+}
+
+/* CORES PERSONALIZADAS - TAILWIND */
+@theme {
+  /* BASE - TEMA CLARO */
+  --color-fundo-pagina: #dbe6f0;
+  --color-fundo-superficie: #ffffff;
+  --color-fundo-superficie-suave: #dce6ef;
+  --color-borda-padrao: #dbe6f0;
+  --color-texto-principal: #1e293b;
+  --color-texto-secundario: #94a3b8;
+  --color-fundo-navbar-sidebar: #ffffff;
+
+  /* DESTAQUE */
+  --color-destaque: #fb923c;
+  --color-destaque-hover: #f97316;
+  --color-destaque-suave: #fff7ed;
+
+  /* STATUS */
+  --color-sucesso: #10b981;
+  --color-aviso: #f59e0b;
+  --color-erro: #f43f5e;
+  --color-info: #0ea5e9;
+  --color-indigo: #818cf8;
+
+  /* BADGES E ÍCONES */
+  --color-verde-claro: #d1fae5;
+  --color-verde-medio: #34d399;
+  --color-verde-escuro: #059669;
+
+  --color-azul-claro: #e0f2fe;
+  --color-azul-medio: #38bdf8;
+  --color-azul-escuro: #0284c7;
+
+  --color-roxo-claro: #ede9fe;
+  --color-roxo-medio: #a78bfa;
+  --color-roxo-escuro: #7c3aed;
+
+  --color-vermelho-claro: #ffe4e6;
+  --color-vermelho-medio: #fb7185;
+  --color-vermelho-escuro: #e11d48;
+
+  --color-laranja-claro: #ffedd5;
+  --color-laranja-medio: #fb923c;
+  --color-laranja-escuro: #ea580c;
+}
+
+/* CORES - TEMA DARK */
+@variant dark {
+  /* BASE - TEMA ESCURO */
+  --color-fundo-pagina: #0f172a;
+  --color-fundo-superficie: #1e293b;
+  --color-fundo-superficie-suave: #334155;
+  --color-borda-padrao: #0f172a;
+  --color-texto-principal: #f8fafc;
+  --color-texto-secundario: #64748b;
+  --color-fundo-navbar-sidebar: #020617;
+
+  /* DESTAQUE */
+  --color-destaque: #fb923c;
+  --color-destaque-hover: #f97316;
+  --color-destaque-suave: #431407;
+
+  /* STATUS */
+  --color-sucesso: #10b981;
+  --color-aviso: #f59e0b;
+  --color-erro: #f43f5e;
+  --color-info: #0ea5e9;
+  --color-indigo: #818cf8;
+
+  /* BADGES E ÍCONES */
+  --color-verde-claro: #052e26;
+  --color-verde-medio: #34d399;
+  --color-verde-escuro: #6ee7b7;
+
+  --color-azul-claro: #082f49;
+  --color-azul-medio: #38bdf8;
+  --color-azul-escuro: #7dd3fc;
+
+  --color-roxo-claro: #2e1065;
+  --color-roxo-medio: #a78bfa;
+  --color-roxo-escuro: #c4b5fd;
+
+  --color-vermelho-claro: #4c0519;
+  --color-vermelho-medio: #fb7185;
+  --color-vermelho-escuro: #fda4af;
+
+  --color-laranja-claro: #431407;
+  --color-laranja-medio: #fb923c;
+  --color-laranja-escuro: #fdba74;
+}
+
+@font-face {
+  font-family: "Loen";
+  src: url("/fonts/Loen.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .hyphens-auto {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+}
+
+:root {
+  font-family:
+    Michroma, Inter, Manrope, Ubuntu, "Loen", system-ui, Avenir, Helvetica,
+    Arial, sans-serif;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
