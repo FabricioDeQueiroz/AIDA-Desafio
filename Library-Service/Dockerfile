@@ -19,7 +19,7 @@ WORKDIR "/src/Library-Service/"
 CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5042"]
 
 FROM dev AS test
-CMD ["dotnet", "test", "Library-Service.csproj", "-l", "console;verbosity=normal"]
+CMD ["sh", "-c", "dotnet test --list-tests && dotnet test -l \"console;verbosity=normal\" -- RunConfiguration.TreatNoTestsAsError=true"]
 
 FROM dev AS lint
 CMD ["dotnet", "format", "Library-Service.csproj", "--verify-no-changes", "--verbosity", "d"]
