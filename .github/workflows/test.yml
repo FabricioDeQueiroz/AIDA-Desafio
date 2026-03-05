@@ -50,6 +50,7 @@ jobs:
       - name: Apply Database Migrations
         env:
           ASPNETCORE_ENVIRONMENT: Test
+          FRONTEND_ALLOWED_ORIGINS: http://localhost:5173
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
           dotnet tool run dotnet-ef database update --project Library-Service
@@ -62,6 +63,7 @@ jobs:
           POSTGRES_DB: Library_CI_Tests
           DB_HOST: localhost
           DB_PORT: 5432
+          FRONTEND_ALLOWED_ORIGINS: http://localhost:5173
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
           dotnet restore Library-Service/Library-Service.csproj
