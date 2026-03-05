@@ -6,6 +6,7 @@ type ConfirmDialogProps = {
   description: string;
   confirmText?: string;
   cancelText?: string;
+  confirmTone?: "danger" | "info";
   isLoading?: boolean;
   onConfirm: () => void;
 };
@@ -16,9 +17,15 @@ export const ConfirmDialog = ({
   description,
   confirmText = "Confirmar",
   cancelText = "Cancelar",
+  confirmTone = "danger",
   isLoading,
   onConfirm,
 }: ConfirmDialogProps) => {
+  const confirmButtonClass =
+    confirmTone === "info"
+      ? "inline-flex cursor-pointer items-center gap-2 rounded-xl bg-info px-4 py-2 text-sm font-semibold text-texto-principal transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+      : "inline-flex cursor-pointer items-center gap-2 rounded-xl bg-erro px-4 py-2 text-sm font-semibold text-texto-principal transition hover:bg-erro/70 disabled:cursor-not-allowed disabled:opacity-60";
+
   return (
     <dialog
       id={id}
@@ -42,7 +49,7 @@ export const ConfirmDialog = ({
             </button>
             <button
               type="button"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-erro px-4 py-2 text-sm font-semibold text-texto-principal transition hover:bg-erro/70 disabled:cursor-not-allowed disabled:opacity-60"
+              className={confirmButtonClass}
               onClick={onConfirm}
               disabled={isLoading}
             >

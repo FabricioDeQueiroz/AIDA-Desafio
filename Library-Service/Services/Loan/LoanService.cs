@@ -18,12 +18,12 @@ public class LoanService(AppDbContext context) : ILoanService
             if (size <= 0) size = 10;
 
             var query = _context.Loans.AsNoTracking();
-            
-            var totalCount = await query.CountAsync();
 
             // Optional filter for status
             if (status.HasValue)
                 query = query.Where(l => l.Status == status.Value);
+
+            var totalCount = await query.CountAsync();
 
             // Loans paginated query 
             var loans = await query
