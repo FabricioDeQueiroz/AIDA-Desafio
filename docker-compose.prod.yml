@@ -1,0 +1,40 @@
+services:
+  library-postgres-prod:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  library-service-prod:
+    build:
+      context: .
+      dockerfile: Library-Service/Dockerfile.prod
+      args:
+        BUILD_CONFIGURATION: Release
+    depends_on:
+      library-postgres-prod:
+        condition: service_healthy
+    ports:
+      - "5042:5042"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=library-postgres-prod;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - Cors__AllowedOrigins=${FRONTEND_ALLOWED_ORIGINS}
+    volumes:
+      - ./Library-Service:/src/Library-Service
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+
+volumes:
+  postgres_data:
