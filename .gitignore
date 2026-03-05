@@ -13,3 +13,6 @@ Library-Service/appsettings.Development.json
 Library-Service/.idea/
 TestResults/
 data-protection-keys/
+
+Library-Service/Tests/obj/
+Library-Service/Tests/bin/

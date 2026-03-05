@@ -1,6 +1,9 @@
 name: Test Library - Pipeline
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -53,7 +56,7 @@ jobs:
           Cors__AllowedOrigins: http://localhost:5173
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
-          dotnet tool run dotnet-ef database update --project Library-Service
+          dotnet tool run dotnet-ef database update --project Library-Service/Library-Service.csproj --startup-project Library-Service/Library-Service.csproj --no-build
 
       - name: Run tests
         env:
@@ -67,4 +70,4 @@ jobs:
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
           dotnet restore Library-Service/Library-Service.csproj
-          dotnet test Library-Service/Library-Service.csproj -l "console;verbosity=normal" --no-restore
+          dotnet test Library-Service/Library-Service.csproj -l "console;verbosity=normal" --no-restore -- RunConfiguration.TreatNoTestsAsError=true
