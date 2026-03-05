@@ -51,7 +51,9 @@ export const DetailsSidePanel = ({
         className="absolute inset-y-0 right-0 flex h-dvh w-full max-w-full flex-col border-l border-borda-padrao bg-fundo-navbar-sidebar p-5 sm:w-136 sm:max-w-136 sm:p-7"
       >
         <header className="flex items-center justify-between">
-          <h2 className="text-2xl font-black tracking-tight border-l-[3px] border-destaque pl-2">{title}</h2>
+          <h2 className="text-2xl font-black tracking-tight border-l-[3px] border-destaque pl-2">
+            {title}
+          </h2>
           <button
             type="button"
             className="cursor-pointer rounded-xl p-2 text-texto-secundario transition hover:bg-fundo-superficie-suave hover:text-texto-principal"
@@ -64,7 +66,11 @@ export const DetailsSidePanel = ({
 
         <div className="mt-6 flex-1 overflow-y-auto">{children}</div>
 
-        {footer && <footer className="mt-5 border-t border-borda-padrao pt-5">{footer}</footer>}
+        {footer && (
+          <footer className="mt-5 border-t border-borda-padrao pt-5">
+            {footer}
+          </footer>
+        )}
       </aside>
     </div>
   );

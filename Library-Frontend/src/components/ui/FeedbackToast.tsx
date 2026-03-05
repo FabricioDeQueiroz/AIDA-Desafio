@@ -6,7 +6,11 @@ type FeedbackToastProps = {
   onClose: () => void;
 };
 
-export const FeedbackToast = ({ type, message, onClose }: FeedbackToastProps) => {
+export const FeedbackToast = ({
+  type,
+  message,
+  onClose,
+}: FeedbackToastProps) => {
   return (
     <div className="fixed right-4 top-4 z-90 max-w-sm">
       <div

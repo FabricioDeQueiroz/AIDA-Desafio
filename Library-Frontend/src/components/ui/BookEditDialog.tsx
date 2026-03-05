@@ -46,7 +46,9 @@ export const BookEditDialog = ({
               {...form.register("title")}
               aria-invalid={Boolean(form.formState.errors.title)}
             />
-            <span className="mt-1 block text-xs text-erro">{form.formState.errors.title?.message}</span>
+            <span className="mt-1 block text-xs text-erro">
+              {form.formState.errors.title?.message}
+            </span>
           </label>
 
           <label className="block">
@@ -65,7 +67,9 @@ export const BookEditDialog = ({
               }}
               aria-invalid={Boolean(form.formState.errors.isbn)}
             />
-            <span className="mt-1 block text-xs text-erro">{form.formState.errors.isbn?.message}</span>
+            <span className="mt-1 block text-xs text-erro">
+              {form.formState.errors.isbn?.message}
+            </span>
           </label>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -77,18 +81,24 @@ export const BookEditDialog = ({
                 {...form.register("year", { valueAsNumber: true })}
                 aria-invalid={Boolean(form.formState.errors.year)}
               />
-              <span className="mt-1 block text-xs text-erro">{form.formState.errors.year?.message}</span>
+              <span className="mt-1 block text-xs text-erro">
+                {form.formState.errors.year?.message}
+              </span>
             </label>
 
             <label className="block">
-              <span className="mb-1 block text-sm font-semibold">Quantidade</span>
+              <span className="mb-1 block text-sm font-semibold">
+                Quantidade
+              </span>
               <input
                 type="number"
                 className="w-full rounded-xl border border-borda-padrao bg-fundo-superficie px-3 py-2 text-texto-principal outline-none transition focus:border-destaque"
                 {...form.register("quantity", { valueAsNumber: true })}
                 aria-invalid={Boolean(form.formState.errors.quantity)}
               />
-              <span className="mt-1 block text-xs text-erro">{form.formState.errors.quantity?.message}</span>
+              <span className="mt-1 block text-xs text-erro">
+                {form.formState.errors.quantity?.message}
+              </span>
             </label>
           </div>
 
@@ -106,7 +116,9 @@ export const BookEditDialog = ({
                 </option>
               ))}
             </select>
-            <span className="mt-1 block text-xs text-erro">{form.formState.errors.idAuthor?.message}</span>
+            <span className="mt-1 block text-xs text-erro">
+              {form.formState.errors.idAuthor?.message}
+            </span>
           </label>
 
           <div className="flex justify-end gap-2 pt-1">

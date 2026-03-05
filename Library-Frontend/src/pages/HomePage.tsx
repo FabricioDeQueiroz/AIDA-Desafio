@@ -26,7 +26,7 @@ import { BookEditDialog } from "../components/ui/BookEditDialog";
 import { formatIsbn } from "../utils/isbn";
 
 const sectionCardClass =
-  "rounded border border-borda-padrao bg-fundo-superficie p-6 shadow-sm";
+  "rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 shadow-sm";
 
 const EDIT_BOOK_MODAL_ID = "home-book-edit-modal";
 const DELETE_BOOK_MODAL_ID = "home-book-delete-modal";
@@ -147,7 +147,10 @@ export const HomePage = () => {
       queryClient.invalidateQueries({ queryKey: ["dashboard", "books"] });
       queryClient.invalidateQueries({ queryKey: ["dashboard", "authors"] });
       setSelectedBook(updatedBook);
-      setFeedback({ type: "success", message: "Livro atualizado com sucesso." });
+      setFeedback({
+        type: "success",
+        message: "Livro atualizado com sucesso.",
+      });
       closeDialog(EDIT_BOOK_MODAL_ID);
     },
     onError: (error) => {
@@ -184,7 +187,8 @@ export const HomePage = () => {
     (total, item) => total + item.quantity,
     0,
   );
-  const authorOptions = authorsForFormQuery.data ?? authorsQuery.data?.items ?? [];
+  const authorOptions =
+    authorsForFormQuery.data ?? authorsQuery.data?.items ?? [];
 
   const monthlyLoans = useMemo(() => {
     const loans = loansForChartQuery.data ?? [];
@@ -265,7 +269,7 @@ export const HomePage = () => {
       value: totalBooks,
       isLoading: booksQuery.isLoading,
       icon: Book,
-      bgClass: "bg-laranja-claro/70",
+      bgClass: "bg-laranja-claro/70 rounded-lg",
       textClass: "text-laranja-escuro",
     },
     {
@@ -273,7 +277,7 @@ export const HomePage = () => {
       value: totalAuthors,
       isLoading: authorsQuery.isLoading,
       icon: Users,
-      bgClass: "bg-roxo-claro/70",
+      bgClass: "bg-roxo-claro/70 rounded-lg",
       textClass: "text-roxo-escuro",
     },
     {
@@ -281,7 +285,7 @@ export const HomePage = () => {
       value: activeLoans,
       isLoading: activeLoansQuery.isLoading,
       icon: ArrowLeftRight,
-      bgClass: "bg-vermelho-claro/70",
+      bgClass: "bg-vermelho-claro/70 rounded-lg",
       textClass: "text-vermelho-escuro",
     },
     {
@@ -289,7 +293,7 @@ export const HomePage = () => {
       value: totalQuantity,
       isLoading: booksQuery.isLoading || allBooksQuery.isLoading,
       icon: LibraryBig,
-      bgClass: "bg-verde-claro/70",
+      bgClass: "bg-verde-claro/70 rounded-lg",
       textClass: "text-verde-escuro",
     },
   ];
@@ -362,7 +366,10 @@ export const HomePage = () => {
           {loansForChartQuery.isLoading ? (
             <div className="pb-8 pt-16 flex h-full items-end justify-between gap-2 sm:gap-3">
               {Array.from({ length: 7 }).map((_, index) => (
-                <div key={index} className="flex h-full flex-1 flex-col items-center justify-end">
+                <div
+                  key={index}
+                  className="flex h-full flex-1 flex-col items-center justify-end"
+                >
                   <div className="h-3 w-6 animate-pulse rounded bg-fundo-superficie-suave" />
                   <div className="mt-2 flex h-40 w-full items-end justify-center">
                     <div className="h-16 w-3 animate-pulse rounded-t bg-fundo-superficie-suave" />
@@ -507,13 +514,17 @@ export const HomePage = () => {
                 <p className="text-xs font-black uppercase tracking-wider text-texto-secundario">
                   ISBN
                 </p>
-                <p className="mt-1 text-lg font-black">{formatIsbn(selectedBook.isbn)}</p>
+                <p className="mt-1 text-lg font-black">
+                  {formatIsbn(selectedBook.isbn)}
+                </p>
               </div>
               <div className="flex flex-col items-center">
                 <p className="text-xs font-black uppercase tracking-wider text-texto-secundario">
                   Disponível
                 </p>
-                <p className="mt-1 text-lg font-black">{selectedBook.quantity}</p>
+                <p className="mt-1 text-lg font-black">
+                  {selectedBook.quantity}
+                </p>
               </div>
               <div className="flex flex-col items-end">
                 <p className="text-xs font-black uppercase tracking-wider text-texto-secundario">

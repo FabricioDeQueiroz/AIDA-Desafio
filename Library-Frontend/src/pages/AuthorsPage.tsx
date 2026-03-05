@@ -377,7 +377,7 @@ export const AuthorsPage = () => {
           }
         }}
       >
-        <div className="w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
+        <div className="w-[min(92vw,24rem)] lg:w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
           <h3 className="text-lg font-bold">{modalTitle}</h3>
 
           <form className="mt-5 space-y-4" onSubmit={handleSubmit}>

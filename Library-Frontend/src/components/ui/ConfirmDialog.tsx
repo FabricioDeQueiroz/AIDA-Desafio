@@ -36,7 +36,7 @@ export const ConfirmDialog = ({
         }
       }}
     >
-      <div className="w-[min(92vw,28rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
+      <div className="w-[min(92vw,24rem)] lg:w-[min(92vw,28rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
         <h3 className="text-lg font-bold">{title}</h3>
         <p className="py-3 text-sm text-texto-secundario">{description}</p>
         <div className="mt-2 flex justify-end">

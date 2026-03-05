@@ -5,7 +5,9 @@ import { requestTracker } from "../../services/requestTracker";
 export const GlobalRequestIndicator = () => {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
-  const [activeRequests, setActiveRequests] = useState(requestTracker.getCount());
+  const [activeRequests, setActiveRequests] = useState(
+    requestTracker.getCount(),
+  );
 
   useEffect(() => requestTracker.subscribe(setActiveRequests), []);
 

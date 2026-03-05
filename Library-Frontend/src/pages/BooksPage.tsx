@@ -353,9 +353,10 @@ export const BooksPage = () => {
               }}
             />
             <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-texto-principal/60 flex flex-row gap-x-1">
-              <kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">Ctrl</kbd>
-              +
-              <kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">K</kbd>
+              <kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">
+                Ctrl
+              </kbd>
+              +<kbd className="kbd bg-fundo-navbar-sidebar/30 border-0">K</kbd>
             </div>
           </label>
 
@@ -494,7 +495,7 @@ export const BooksPage = () => {
           }
         }}
       >
-        <div className="w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
+        <div className="w-[min(92vw,24rem)] lg:w-[min(92vw,34rem)] rounded-3xl border border-borda-padrao bg-fundo-superficie p-6 text-texto-principal shadow-2xl">
           <h3 className="text-lg font-bold">{modalTitle}</h3>
 
           <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
