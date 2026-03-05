@@ -209,7 +209,7 @@ export const LoansPage = () => {
       )}
 
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-2xl font-black">Lista de Empréstimos</h1>
+        <h1 className="lg:text-2xl text-xl font-black">Lista de Empréstimos</h1>
 
         <button
           type="button"
@@ -229,7 +229,7 @@ export const LoansPage = () => {
               <button
                 key={String(option.value)}
                 type="button"
-                className={`cursor-pointer rounded-xl px-4 py-2 text-sm font-bold transition ${
+                className={`cursor-pointer select-none rounded-xl px-4 py-2 text-sm font-bold transition ${
                   active
                     ? "bg-destaque text-texto-principal shadow-sm"
                     : "text-texto-secundario hover:bg-fundo-superficie"

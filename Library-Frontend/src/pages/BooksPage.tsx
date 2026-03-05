@@ -408,11 +408,13 @@ export const BooksPage = () => {
                   key={book.idBook}
                   className="border-b border-borda-padrao/60"
                 >
-                  <td className="px-3 py-4 font-semibold">{book.title}</td>
+                  <td className="px-3 py-4 font-semibold w-[35%]">
+                    {book.title}
+                  </td>
                   <td className="px-3 py-4 font-semibold text-texto-secundario w-[15%]">
                     {formatIsbn(book.isbn)}
                   </td>
-                  <td className="px-3 py-4 w-[12%]">
+                  <td className="px-3 py-4 w-[10%]">
                     <span className="rounded bg-fundo-superficie-suave px-4 py-1.5 text-sm font-semibold">
                       {book.quantity}
                     </span>
