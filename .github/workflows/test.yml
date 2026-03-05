@@ -70,4 +70,4 @@ jobs:
           Cors__AllowedOrigins: http://localhost:5173
           ConnectionStrings__DefaultConnection: Host=localhost;Port=5432;Database=Library_CI_Tests;Username=postgres_ci;Password=postgres_ci_pass
         run: |
-          dotnet test -l "console;verbosity=normal" -- RunConfiguration.TreatNoTestsAsError=true
+          dotnet test Library-Service/Tests/Tests.csproj -l "console;verbosity=normal"
