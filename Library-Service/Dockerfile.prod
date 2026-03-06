@@ -11,8 +11,10 @@ RUN dotnet restore "Library-Service/Library-Service.csproj"
 COPY . .
 WORKDIR "/src/Library-Service"
 
-RUN Cors__AllowedOrigins="test" dotnet test "Tests/Tests.csproj" -l "console;verbosity=normal"
-
+RUN Cors__AllowedOrigins="test" \
+    ConnectionStrings__DefaultConnection="Host=localhost;Database=test;Username=test;Password=test" \
+    dotnet test "Tests/Tests.csproj" -l "console;verbosity=normal"
+    
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
