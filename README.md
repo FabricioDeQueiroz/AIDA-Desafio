@@ -8,6 +8,19 @@ Aplicação de gerenciamento de biblioteca com backend em .NET (C#) e frontend e
 - **Regra de exclusão de livros (RF-11/RI-11)**: em vez de bloquear somente livros com empréstimos ativos, foi adotada restrição para qualquer livro com histórico de empréstimos (ativos ou retornados), preservando a integridade dos registros.
 - **Testes de integração com banco principal**: os testes foram configurados para usar o banco da aplicação, também servindo como carga inicial de dados de exemplo para facilitar a avaliação da plataforma.
 
+## Deploy
+
+**Links:**
+
+- **Site (Frontend)**: https://booksmanager.fabriciomqueiroz.com.br
+- **API (Backend)**: https://booksmanagerapi.fabriciomqueiroz.com.br
+
+**Detalhes:**
+
+- **Frontend**: publicado no Cloudflare Pages, escutando a branch `deploy`.
+- **Backend e banco de dados**: publicados em VPS Hostinger (Debian), via painel Easypanel, escutando a branch `deploy`.
+- **Política de CORS do backend**: configurada por whitelist de origens permitidas, aceitando requisições somente dos domínios autorizados do frontend.
+
 ## Setup
 
 ### Arquivos `.env`
