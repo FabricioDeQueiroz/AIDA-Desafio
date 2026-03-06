@@ -9,6 +9,7 @@ import {
   LayoutPanelTop,
   Menu,
   Moon,
+  Languages,
   Sun,
   Users,
   X,
@@ -37,26 +38,43 @@ const menuButtonClass = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 const storageKey = "biblioteca-tema-dark";
+const fontStorageKey = "biblioteca-fonte-loen";
 
 export const AppLayout = () => {
   const location = useLocation();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => localStorage.getItem(storageKey) === "1",
+  );
+  const [isLoenFont, setIsLoenFont] = useState(
+    () => localStorage.getItem(fontStorageKey) === "1",
+  );
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const applyFont = (enabled: boolean) => {
+    document.body.classList.toggle("font-loen", enabled);
+    document.body.classList.toggle("font-helvetica", !enabled);
+  };
+
   useEffect(() => {
-    const persisted = localStorage.getItem(storageKey);
-    const enabled = persisted === "1";
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsDarkMode(enabled);
-    document.documentElement.classList.toggle("dark", enabled);
-  }, []);
+    document.documentElement.classList.toggle("dark", isDarkMode);
+    applyFont(isLoenFont);
+  }, [isDarkMode, isLoenFont]);
 
   const toggleDarkMode = () => {
     setIsDarkMode((current) => {
       const next = !current;
       document.documentElement.classList.toggle("dark", next);
       localStorage.setItem(storageKey, next ? "1" : "0");
+      return next;
+    });
+  };
+
+  const toggleFont = () => {
+    setIsLoenFont((current) => {
+      const next = !current;
+      applyFont(next);
+      localStorage.setItem(fontStorageKey, next ? "1" : "0");
       return next;
     });
   };
@@ -87,7 +105,9 @@ export const AppLayout = () => {
             </div>
           </Link>
 
-          <h1 className="border-l-2 border-borda-padrao ml-4 pl-3 text-2xl font-black">{activeTitle}</h1>
+          <h1 className="border-l-2 border-borda-padrao ml-4 pl-3 text-2xl font-black">
+            {activeTitle}
+          </h1>
         </div>
 
         <button
@@ -123,6 +143,18 @@ export const AppLayout = () => {
             ))}
           </nav>
           <div className="border-t border-borda-padrao">
+            <button
+              type="button"
+              className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-lg font-semibold text-texto-secundario transition hover:bg-destaque-suave hover:text-destaque"
+              onClick={toggleFont}
+              aria-label="Alternar fonte"
+              aria-pressed={isLoenFont}
+            >
+              <Languages className="h-6 w-6" />
+              <span className={`${isSidebarExpanded ? "block" : "hidden"}`}>
+                Tente a sorte
+              </span>
+            </button>
             <button
               type="button"
               className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-lg font-semibold text-texto-secundario transition hover:bg-destaque-suave hover:text-destaque"
@@ -197,6 +229,18 @@ export const AppLayout = () => {
         </nav>
 
         <div className="border-t border-borda-padrao py-3 mx-2">
+          <button
+            type="button"
+            className="flex w-full items-center gap-3 rounded-[10px] px-4 py-3 font-semibold text-texto-secundario transition hover:bg-destaque-suave hover:text-destaque"
+            onClick={toggleFont}
+            aria-label="Alternar fonte"
+            aria-pressed={isLoenFont}
+          >
+            <Languages className="h-6 w-6" />
+            <span className={`${isSidebarExpanded ? "block" : "hidden"}`}>
+              Tente a sorte
+            </span>
+          </button>
           <button
             type="button"
             className="flex w-full items-center gap-3 rounded-[10px] px-4 py-3 font-semibold text-texto-secundario transition hover:bg-destaque-suave hover:text-destaque"
