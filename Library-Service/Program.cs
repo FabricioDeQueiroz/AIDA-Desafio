@@ -61,7 +61,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Apply Migrations:
-if (app.Environment.EnvironmentName != "Testing")
+var isTestEnvironment = app.Environment.IsEnvironment("Testing") || app.Environment.IsEnvironment("Test");
+if (!isTestEnvironment)
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();

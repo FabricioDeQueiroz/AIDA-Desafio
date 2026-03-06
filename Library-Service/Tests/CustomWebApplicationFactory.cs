@@ -24,7 +24,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         var allowedOrigins = Environment.GetEnvironmentVariable("Cors__AllowedOrigins");
 
         builder.UseContentRoot(Directory.GetCurrentDirectory());
-        builder.UseEnvironment("Development");
+        builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, config) =>
         {
             config.AddInMemoryCollection(new Dictionary<string, string?>
