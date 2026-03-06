@@ -16,7 +16,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 
 WORKDIR /app
 
-RUN dotnet tool install --global dotnet-ef
+RUN dotnet tool restore
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 COPY --from=build /app/publish .
