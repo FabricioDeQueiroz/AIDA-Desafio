@@ -1,28 +1,24 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
-
 WORKDIR /src
+
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
 COPY ["Library-Service/Library-Service.csproj", "Library-Service/"]
 RUN dotnet restore "Library-Service/Library-Service.csproj"
 
 COPY . .
-
 WORKDIR "/src/Library-Service"
+
+RUN dotnet test "Library-Service.csproj" -l "console;verbosity=normal" -c $BUILD_CONFIGURATION
 
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
-
 WORKDIR /app
-
-RUN dotnet tool restore
-ENV PATH="${PATH}:/root/.dotnet/tools"
-
 COPY --from=build /app/publish .
 
 EXPOSE 5042
 
-RUN dotnet test "Library-Service.csproj" -l "console;verbosity=normal"
-
-CMD ["dotnet", "run", "Library-Service.csproj"]
+ENTRYPOINT ["dotnet", "Library-Service.dll"]
