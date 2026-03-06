@@ -11,7 +11,7 @@ RUN dotnet restore "Library-Service/Library-Service.csproj"
 COPY . .
 WORKDIR "/src/Library-Service"
 
-RUN dotnet test Library-Service/Tests/Tests.csproj -l "console;verbosity=normal" -c $BUILD_CONFIGURATION
+RUN dotnet test Tests/Tests.csproj -l "console;verbosity=normal" -c $BUILD_CONFIGURATION
 
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish
 
